@@ -1,9 +1,9 @@
 var router = require('express').Router();
-var outdoorsCtrl = require('../controllers/outdoors');
+var bloggersCtrl = require('../controllers/bloggers');
 
 // GET /students
-router.get('/outdoors', outdoorsCtrl.index);
-router.post('/facts', isLoggedIn, outdoorsCtrl.addFact);
+router.get('/bloggers', bloggersCtrl.index);
+router.post('/facts', isLoggedIn, bloggersCtrl.addFact);
 
 
 // Authorizing the user to use a route

@@ -7,7 +7,7 @@ const factSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const outdoorSchema = new mongoose.Schema({
+const bloggerSchema = new mongoose.Schema({
     name: String,
     email: String,
     cohort: String,
@@ -18,4 +18,4 @@ const outdoorSchema = new mongoose.Schema({
     timestamps: true // need to have googleId on my userSchema
 });
 
-module.exports = mongoose.model('Outdoor', outdoorSchema);
+module.exports = mongoose.model('Blogger', bloggerSchema);
