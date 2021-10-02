@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>The Great Outdoor Blog</title>
+  <title>The Great Outdoor Journal</title>
   <!-- Google Icon Fonts used by Materialize -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Materialize CSS Framework -->
@@ -15,7 +15,7 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a href="" class="brand-logo left">The Great Outdoor Blog</a>
+        <a href="" class="brand-logo left">The Great Outdoor Journal</a>
         <ul class="right">
           <li>
             <% if (user) { %>
@@ -58,25 +58,25 @@
       </form>
     </div>
     <div class="row">
-      <div id="outdoors" class="col s12">
-        <% outdoors.forEach(function(outdoor) { %>
+      <div id="bloggers" class="col s12">
+        <% bloggers.forEach(function(blogger) { %>
           <div class="card blue-grey">
             <div class="card-content white-text">
               <div>
                 <span class="card-title">
-                  <% if (student.avatar) { %>
-                    <img src="<%= student.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+                  <% if (blogger.avatar) { %>
+                    <img src="<%= blogger.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
                   <% } else { %>
                     <i class="small material-icons">perm_identity</i>
                   <% } %>
-                  <span class="student-name"><%= student.name %></span>
-                  <% if (student.cohort) { %>
-                    <span class="badge white">SEI <%= student.cohort %></span>
+                  <span class="blogger-name"><%= blogger.name %></span>
+                  <% if (blogger.cohort) { %>
+                    <span class="badge white">SEI <%= blogger.cohort %></span>
                   <% } %>
                 </span>
               </div>
               <ul class="collection">
-                <% student.facts.forEach(function(fact) { %>
+                <% blogger.facts.forEach(function(fact) { %>
                   <li class="collection-item blue-grey-text text-darken-2">
                     
 
@@ -84,7 +84,7 @@
 
                     <!-- Add delete form - don't forget to install method-override -->
                     <span class="title"><%- fact.text %></span>
-                    <% if (student._id.equals(user && user._id)) { %>
+                    <% if (blogger._id.equals(user && user._id)) { %>
                       <form action="/facts/<%= fact._id %>?_method=DELETE" method="POST" class="secondary-content">
                         <button type="submit" class="btn-small red-text">X</button>
                       </form>
@@ -93,7 +93,7 @@
                 <% }) %>
               </ul>
 
-              <% if (student._id.equals(user && user._id)) { %>
+              <% if (blogger._id.equals(user && user._id)) { %>
                 <div class="card-action">
                   <form action="/facts" method="POST">
                     <input type="text" name="text" class="white-text">

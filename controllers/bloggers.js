@@ -1,8 +1,17 @@
 const Blogger = require('../models/blogger');
 
 module.exports = {
-    index
+    index,
+    addFact
 };
+
+function addFact(req, res){
+    req.user.facts.push(req.body);
+
+    req.user.save(function(err){
+        res.redirect('/bloggers')
+    })
+}
 
 
 function index(req, res, next) {
@@ -13,11 +22,11 @@ function index(req, res, next) {
 
     let sortKey = req.query.sort || 'name';
     Blogger.find(modelQuery)
-    .sort(sortKey).exec(function(err, blogger) {
+    .sort(sortKey).exec(function(err, bloggers) {
         if (err) return next(err);
 
         res.render('bloggers/index', {
-            blogger,
+            bloggers,
             user: req.user,
             name: req.query.name,
             sortKey
