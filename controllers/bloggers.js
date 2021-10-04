@@ -1,17 +1,12 @@
 const Blogger = require('../models/user');
+const Journal = require('../models/journal');
 
 module.exports = {
     index,
-    addFact
+    
 };
 
-// function addFact(req, res){
-//     req.user.facts.push(req.body);
 
-//     req.user.save(function(err){
-//         res.redirect('/bloggers')
-//     })
-// }
 
 
 function index(req, res, next) {
@@ -26,6 +21,7 @@ function index(req, res, next) {
         if (err) return next(err);
 
         res.render('bloggers/index', {
+            users: bloggers,
             bloggers,
             user: req.user,
             name: req.query.name,
