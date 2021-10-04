@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const Blogger = require('../models/blogger')
+const Blogger = require('../models/user')
 //Require your User Model here!
 
 // configuring Passport!

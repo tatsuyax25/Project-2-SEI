@@ -1,17 +1,17 @@
-const Blogger = require('../models/blogger');
+const Blogger = require('../models/user');
 
 module.exports = {
     index,
     addFact
 };
 
-function addFact(req, res){
-    req.user.facts.push(req.body);
+// function addFact(req, res){
+//     req.user.facts.push(req.body);
 
-    req.user.save(function(err){
-        res.redirect('/bloggers')
-    })
-}
+//     req.user.save(function(err){
+//         res.redirect('/bloggers')
+//     })
+// }
 
 
 function index(req, res, next) {
