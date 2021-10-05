@@ -3,8 +3,7 @@ var bloggersCtrl = require('../controllers/bloggers');
 
 // GET /students
 router.get('/bloggers', bloggersCtrl.index);
-// router.post('/facts', isLoggedIn, bloggersCtrl.addFact);
-
+router.post('/blogger', bloggersCtrl.create);
 
 // Authorizing the user to use a route
 // probably only want to use this on

@@ -40,9 +40,10 @@
             
               <% if (user._id.equals(user && user._id)) { %>
                 <div class="card-action">
-                  <form action="/comments" method="POST">
+                  <form action="/blogger" method="POST">
+                    <input type="text" name="name" class="white-text">
                     <input type="text" name="text" class="white-text">
-                    <button type="submit" class="btn white-text">Add Comment</button>
+                    <button type="submit" class="btn white-text">Create Post</button>
                   </form>
                 </div>
               <% } %>
@@ -51,6 +52,27 @@
             </div>
           </div>
         <% }) %>
+      </div>
+    </div>
+    <div class="row">
+      <div id="users" class="col s12">
+        <% if (journals.length){ %> 
+        <% journals.forEach(function(journal) { %>
+          <div class="card blue-grey">
+            <div class="card-content white-text">
+              
+            
+            <%= journal.name %> 
+            <%= journal.text %>
+      
+         
+             
+            </div>
+          </div>
+        <% }) %>
+        <% } else { %>
+          <%= 'No Journals Yet' %>  
+          <% } %> 
       </div>
     </div>
   </div>
