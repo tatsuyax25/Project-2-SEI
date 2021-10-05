@@ -5,9 +5,17 @@ module.exports = {
     new: newBlogger,
     create,
     index,
+    delete: deleteBlogger
     // show,
 
 };
+
+function deleteBlogger(req, res) {
+
+    Blogger.deleteOne(req.params.id);
+
+    res.redirect('/bloggers');
+}
 
 function newBlogger(req, res) {
     res.render("bloggers/new", { title: "New Blogger" });
