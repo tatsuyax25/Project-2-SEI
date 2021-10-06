@@ -33,6 +33,7 @@
     
     <div class="row">
       <div id="users" class="col s12">
+        <% if (user) { %>
           <div class="card blue-grey">
             <div class="card-content white-text">
               
@@ -50,21 +51,26 @@
              
             </div>
           </div>
+        <% } %>
       </div>
     </div>
     <div class="row">
       <div id="users" class="col s12">
         <% if (journals.length){ %> 
-        <% journals.forEach(function(journal) { %>
+        <% journals.forEach(function(j) { %>
           <div class="card blue-grey">
             <div class="card-content white-text">
               
-            
-            <%= journal.name %> 
-            <%= journal.text %>
+              
+
+            <%= j.name %> 
+            <%= j.text %>
+
+            <form class="delete-form" method="POST" action="/journals/<%= j.id %>?_method=DELETE">
+              <button type="submit">X</button>
+            </form>
       
-         
-             
+           
             </div>
           </div>
         <% }) %>

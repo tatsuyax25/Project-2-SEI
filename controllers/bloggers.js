@@ -12,9 +12,10 @@ module.exports = {
 
 function deleteBlogger(req, res) {
 
-    Blogger.deleteOne(req.params.id);
-
-    res.redirect('/bloggers');
+    Blogger.deleteOne({_id: req.params.id}, function(err, deleted) {
+        console.log('deleting a blog')
+        res.redirect('/bloggers');
+    });    
 }
 
 function newBlogger(req, res) {

@@ -3,6 +3,7 @@ var bloggersCtrl = require('../controllers/bloggers');
 
 // GET /students
 router.get('/bloggers', bloggersCtrl.index);
+router.get('/bloggers/bloggers', bloggersCtrl.index );
 router.post('/blogger', bloggersCtrl.create);
 router.delete('/blogger', bloggersCtrl.delete);
 
