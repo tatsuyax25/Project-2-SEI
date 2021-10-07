@@ -32,3 +32,6 @@ This is your passport boilerplate.
 #### Make a commit 
 
 ```git commit -m "setup up oauth and User Model"```
+
+
+https://project-2-sei.herokuapp.com/ 

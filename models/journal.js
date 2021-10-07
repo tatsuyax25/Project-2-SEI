@@ -6,7 +6,7 @@ const journalSchema = new mongoose.Schema({
     name: String,
     picture: String,
     text: String,
-    comments: [commentSchema],
+    comments: ['Comment'],
     user: {type: Schema.Types.ObjectId, ref: "User"}
 }, {
     timestamps: true
