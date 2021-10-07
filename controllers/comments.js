@@ -26,7 +26,7 @@ function create(req, res) {
 
 
 function update(req, res) {
-    Journal.findOne({'comment._id': req.params.id}, function(err, journal) {
+    Journal.updateOne({'comment._id': req.params.id}, function(err, journal) {
         const commentSubdoc = journal.comments.id(req.params.id);
         if (!commentSubdoc.userId.equals(req.user._id)) return res.redirect('/journals/${journal._id');
         commentSubdoc.text = req.body.text;
