@@ -7,19 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Journals</h1>
-    <h1>
-        <%= journal.text %>
-        <%= journal.name %> 
-    </h1>
-    
-   
+    <h1>Edit Journal</h1>
+    <form action="">
+        <input type="text" name="name" value="<%= journal.name %>" >
+        <input type="text" name="text" value="<%= journal.text %>">
+        <input type="submit">
+    </form>
    
 
 </body>
 </html>
-
-
-    
-
- 

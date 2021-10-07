@@ -18,18 +18,21 @@ function edit(req, res) {
     })
 }
 
-function show(req, res){
-    res.render('bloggers/show', {
-        journal: Journal.findOne(req.params.id),
-
-    })
-    // Blogger.findById(req.params.id, function(err, selectedBlogger) {
-    //     console.log(req.params)
-    //     res.render('bloggers/show', {
-    //         title: "Details",
-    //         selectedBlogger
-    //     });
-    // });
+async function show(req, res){
+    console.log(req.params)
+    console.log(req.user)
+    const username = req.user?._id 
+    const journal = await Journal.findById(req.params.id)
+    const thisIsWhatWeAreSendingToTheView = { journal, username }
+    console.log(username, journal.user, username === journal.user)
+    if (username?.toString() === journal.user.toString()) {
+        
+        res.render('bloggers/edit', thisIsWhatWeAreSendingToTheView)
+    } else {
+        res.render('bloggers/show', thisIsWhatWeAreSendingToTheView);
+    }
+    console.log(journal)
+     
     
 }
 
