@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        <%= journal.title %>
+    </h1>
+    <h1>Journals</h1>
+    <form class="delete-form" method="POST" action="/bloggers/<%= journal.id %>?_method=DELETE">
+        <button type="submit" class="btn white-text">X</button>
+    </form>
+    <form action="/bloggers/<%= journal._id %>/comments" method="POST">
+        <input type="text">
+        <button type="submit" class="btn white-text">ADD COMMENT</button>
+      </form>
+      <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
+        <input type="text" value="<%= comment.text %>">
+        <button type="submit">UPDATE COMMENT</button>
+
+      </form>
+</body>
+
+</html>

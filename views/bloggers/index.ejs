@@ -40,7 +40,7 @@
             
               <% if (user._id.equals(user && user._id)) { %>
                 <div class="card-action">
-                  <form action="/blogger" method="POST">
+                  <form action="/bloggers" method="POST">
                     <input type="text" name="name" class="white-text">
                     <input type="text" name="text" class="white-text">
                     <button type="submit" class="btn white-text">Create Post</button>
@@ -63,12 +63,9 @@
               
               
 
-            <%= j.name %> 
+            <a href="/bloggers/<%= j.id %>"><%= j.name %></a> 
             <%= j.text %>
 
-            <form class="delete-form" method="POST" action="/journals/<%= j.id %>?_method=DELETE">
-              <button type="submit">X</button>
-            </form>
       
            
             </div>
