@@ -37,6 +37,16 @@
 
 5. Mongoose
 
+6. Trello
+
+7. OAuth
+
+8. Google Dev Console
+
+9. Heroku
+
+10. Node.js
+
 ## Future Updates
 
 1. Add a sign up for user that can't sign in with google account.
@@ -44,5 +54,7 @@
 2. Being able to upload and post a picture to journal.
 
 3. Add a bit more of CSS style.
+
+4. Add a comment box to add comments on a journal.
 
 https://project-2-sei.herokuapp.com/ 
