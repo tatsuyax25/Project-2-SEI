@@ -63,13 +63,13 @@
           <div class="card blue-grey">
             <div class="card-content white-text">
               
-              <% if (j.user.equals(user._id)) { %>
+              <% if (user && j.user.equals(user._id)) { %>
                 <form action="/bloggers/<%=j._id%>?_method=DELETE" method="POST" class="secondary-content">
                 <button type='submit' class="btn-floating btn-medium waves-effect waves-light red secondary-content"><i class="material-icons">delete</i></button>
                 </form>  
               <% } %>
 
-            <a href="/bloggers/<%= j._id %>"><%= j.name %></a> 
+            <a href="/bloggers/<%= j.id %>"><%= j.name %></a> 
             <%= j.text %>
 
             
