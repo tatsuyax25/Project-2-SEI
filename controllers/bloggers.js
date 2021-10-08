@@ -1,5 +1,6 @@
 const Blogger = require('../models/user');
 const Journal = require('../models/journal');
+const journal = require('../models/journal');
 
 module.exports = {
     new: newBlogger,
@@ -7,14 +8,14 @@ module.exports = {
     index,
     delete: deleteBlogger,
     show,
-    edit
+    edit,
+    update
 
 };
 
 function edit(req, res) {
     Journal.findById(req.params.id, function(err, journal){
-        if (!journal.user.equals(req.user._id)) return res.redirect('/journals');
-        res.render('journals/edit', {journal});
+        res.render('bloggers/edit', {journal});
     })
 }
 
@@ -37,19 +38,36 @@ async function show(req, res){
 }
 
 function deleteBlogger(req, res) {
-    console.log(req.body, "This is what the form sends me")
-    // Note the cool "dot" syntax to query on the property of a subdoc
-    Journal.findOne({'journal._id': req.params.id}, function(err, journal) {
-        console.log('deleting a blog')
-        const journalDoc = journal.id(req.params.id)
-        console.log(journalDoc, "this is my journal")
-        // journalDoc.remove();
-        res.redirect('/bloggers');
-    });    
+    console.log('delete function called')
+    Journal.findByIdAndDelete(req.params.id, function(err, journal){
+        if (err){
+            console.log(err)
+        } else {
+            console.log(journal)
+        }
+        res.redirect('/bloggers')
+    })
+    // console.log(req.body, "This is what the form sends me")
+    // // Note the cool "dot" syntax to query on the property of a subdoc
+    // Journal.findOne({'journal._id': req.params.id}, function(err, journal) {
+    //     console.log('deleting a blog')
+    //     const journalDoc = journal.id(req.params.id)
+    //     console.log(journalDoc, "this is my journal")
+    //     // journalDoc.remove();
+    //     res.redirect('/bloggers');
+    // });    
 }
 
 function newBlogger(req, res) {
     res.render("bloggers/new", { title: "New Blogger" });
+}
+
+async function update(req,res){
+    console.log('update function called')
+    console.log(req.body, '<-- form being updated')
+    const updatedJournal = await Journal.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    console.log(updatedJournal)
+    res.redirect('/bloggers')
 }
 
 function create(req, res) {

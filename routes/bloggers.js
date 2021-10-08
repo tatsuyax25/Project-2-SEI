@@ -5,7 +5,9 @@ var bloggersCtrl = require('../controllers/bloggers');
 router.get('/bloggers', bloggersCtrl.index);
 router.get('/bloggers/bloggers', bloggersCtrl.index );
 router.get('/bloggers/:id', bloggersCtrl.show);
+router.get('/bloggers/:id/edit', bloggersCtrl.edit);
 router.post('/bloggers', bloggersCtrl.create);
+router.put('/bloggers/:id', bloggersCtrl.update);
 router.delete('/bloggers/:id', bloggersCtrl.delete);
 
 // Authorizing the user to use a route

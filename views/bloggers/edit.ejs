@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Edit Journal</h1>
-    <form action="">
+    <form action="/bloggers/<%= journal._id %>?_method=PUT" method="POST">
         <input type="text" name="name" value="<%= journal.name %>" >
         <input type="text" name="text" value="<%= journal.text %>">
         <input type="submit">

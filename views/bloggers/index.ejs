@@ -15,10 +15,12 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
+        
         <a href="" class="brand-logo left">The Great Outdoor Journal</a>
         <ul class="right">
           <li>
             <% if (user) { %>
+              
               <a href="/logout">Log Out</a>
             <% } else { %>
               <a href="/auth/google"> Login with Google</a>
@@ -30,7 +32,7 @@
   </div>
   <div class="container">
     <h2 class="col s4 blue-grey-text text-darken-2">Bloggers</h2>
-    
+    <p id='userTitle'>Welcome, <%= user ? user.name : 'no user' %></p>
     <div class="row">
       <div id="users" class="col s12">
         <% if (user) { %>
@@ -61,12 +63,16 @@
           <div class="card blue-grey">
             <div class="card-content white-text">
               
-              
+              <% if (j.user.equals(user._id)) { %>
+                <form action="/bloggers/<%=j._id%>?_method=DELETE" method="POST" class="secondary-content">
+                <button type='submit' class="btn-floating btn-medium waves-effect waves-light red secondary-content"><i class="material-icons">delete</i></button>
+                </form>  
+              <% } %>
 
             <a href="/bloggers/<%= j.id %>"><%= j.name %></a> 
             <%= j.text %>
 
-      
+            
            
             </div>
           </div>
