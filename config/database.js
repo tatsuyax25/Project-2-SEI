@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+import { connect, connection } from 'mongoose';
 
 // replace your database connection string here
-mongoose.connect(process.env.DATABASE_URL,{
+connect(process.env.DATABASE_URL,{
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
 });
 
-const db = mongoose.connection;
+const db = connection;
 
 // database connection event
 db.on('connected', function () {

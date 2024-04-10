@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const commentSchema = require('./comment')
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
+import commentSchema from './comment';
 
-const journalSchema = new mongoose.Schema({
+const journalSchema = new _Schema({
     name: String,
     picture: String,
     text: String,
@@ -13,4 +13,4 @@ const journalSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('Journal', journalSchema);
+export default model('Journal', journalSchema);

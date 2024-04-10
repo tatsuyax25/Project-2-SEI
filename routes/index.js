@@ -1,5 +1,5 @@
 var router = require('express').Router();
-const passport = require('passport');
+import { authenticate } from 'passport';
 
 // The root route renders our only view
 router.get('/', function(req, res) {
@@ -9,13 +9,13 @@ router.get('/', function(req, res) {
 });
 
 // Google OAuth login route
-router.get('/auth/google', passport.authenticate(
+router.get('/auth/google', authenticate(
   'google',
   { scope: ['profile', 'email'] }
 ));
 
 // Google OAuth callback route
-router.get('/oauth2callback', passport.authenticate(
+router.get('/oauth2callback', authenticate(
   'google',
   {
     successRedirect : '/bloggers', // where do you want the client to go after you login 
@@ -29,4 +29,4 @@ router.get('/logout', function(req, res){
   res.redirect('/bloggers');
 });
 
-module.exports = router;
+export default router;

@@ -1,14 +1,14 @@
-const Journal = require('../models/journal');
+import { findById, updateOne, findOne } from '../models/journal';
 
-module.exports = {
+export default {
     create,
     update,
-    delete: deleteComment
+    remove: deleteComment
 
 }
 
 function create(req, res) {
-    Journal.findById(req.params.id, function(err, journal){
+    findById(req.params.id, function(err, journal){
         if(err) {
             console.log(err)
             return res.send(err)
@@ -26,7 +26,7 @@ function create(req, res) {
 
 
 function update(req, res) {
-    Journal.updateOne({'comment._id': req.params.id}, function(err, journal) {
+    updateOne({'comment._id': req.params.id}, function(err, journal) {
         const commentSubdoc = journal.comments.id(req.params.id);
         if (!commentSubdoc.userId.equals(req.user._id)) return res.redirect('/journals/${journal._id');
         commentSubdoc.text = req.body.text;
@@ -37,7 +37,7 @@ function update(req, res) {
 }
 
 function deleteComment(req, res) {
-    Journal.findOne({'comments._id': req.params.id}, function(err, journal) {
+    findOne({'comments._id': req.params.id}, function(err, journal) {
         const commentSubdoc = journal.comment.id(req.params.id);
         if (!commentSubdoc.userId.equals(req.user._id)) return res.redirect('/journals/${journal._id}');
         commentSubdoc.remove();

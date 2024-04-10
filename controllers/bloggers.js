@@ -1,8 +1,8 @@
-const Blogger = require('../models/user');
-const Journal = require('../models/journal');
-const journal = require('../models/journal');
+import { find } from '../models/user';
+import Journal, { findById, findByIdAndDelete, findByIdAndUpdate, find as _find } from '../models/journal';
+import journal from '../models/journal';
 
-module.exports = {
+export default {
     new: newBlogger,
     create,
     index,
@@ -14,7 +14,7 @@ module.exports = {
 };
 
 function edit(req, res) {
-    Journal.findById(req.params.id, function(err, journal){
+    findById(req.params.id, function(err, journal){
         res.render('bloggers/edit', {journal});
     })
 }
@@ -23,7 +23,7 @@ async function show(req, res){
     console.log(req.params)
     console.log(req.user)
     const username = req.user?._id 
-    const journal = await Journal.findById(req.params.id)
+    const journal = await findById(req.params.id)
     const thisIsWhatWeAreSendingToTheView = { journal, username }
     console.log(username, journal.user, username === journal.user)
     if (username?.toString() === journal.user.toString()) {
@@ -39,7 +39,7 @@ async function show(req, res){
 
 function deleteBlogger(req, res) {
     console.log('delete function called')
-    Journal.findByIdAndDelete(req.params.id, function(err, journal){
+    findByIdAndDelete(req.params.id, function(err, journal){
         if (err){
             console.log(err)
         } else {
@@ -65,7 +65,7 @@ function newBlogger(req, res) {
 async function update(req,res){
     console.log('update function called')
     console.log(req.body, '<-- form being updated')
-    const updatedJournal = await Journal.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    const updatedJournal = await findByIdAndUpdate(req.params.id, req.body, {new: true})
     console.log(updatedJournal)
     res.redirect('/bloggers')
 }
@@ -87,9 +87,9 @@ function index(req, res, next) {
     let modelQuery = req.query.name ? { name: new RegExp(req.query.name, 'i') } : {};
 
     let sortKey = req.query.sort || 'name';
-    Blogger.find(modelQuery)
+    find(modelQuery)
         .sort(sortKey).exec(function (err, bloggers) {
-            Journal.find({}, function (e, journals) {
+            _find({}, function (e, journals) {
 
 
                 if (err) return next(err);
