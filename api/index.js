@@ -1,2 +1,2 @@
-const server = require('../server');
-module.exports = server;
+import server from '../server';
+export default server;
