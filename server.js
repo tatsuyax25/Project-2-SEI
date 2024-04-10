@@ -1,7 +1,7 @@
-import express, { json, urlencoded } from 'express';
-import { join } from 'path';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
+var express = require('express');
+var json = express.json;
+var urlencoded = express.urlencoded;
+// import cookieParser from 'cookie-parser';
 // session middleware
 import session from 'express-session';
 import { initialize, session as _session } from 'passport';
