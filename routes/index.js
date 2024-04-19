@@ -1,4 +1,4 @@
-var router = require('express').Router();
+const router = require('express').Router();
 import { authenticate } from 'passport';
 
 // The root route renders our only view

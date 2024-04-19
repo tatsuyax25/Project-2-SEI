@@ -1,4 +1,4 @@
-var router = require('express').Router()
+const router = require('express').Router()
 import { create, update, remove } from '../controllers/comments';
 
 router.post('/bloggers/:id/comments', isLoggedIn, create);

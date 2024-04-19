@@ -1,5 +1,5 @@
-var router = require('express').Router();
-var bloggersCtrl = require('../controllers/bloggers').default;
+let router = require('express').Router();
+let bloggersCtrl = require('../controllers/bloggers').default;
 
 // GET /students
 router.get('/bloggers', bloggersCtrl.index);
