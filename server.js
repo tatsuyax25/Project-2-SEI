@@ -20,8 +20,8 @@ require('./config/database');
 require('./config/passport');
 
 // require our routes
-import indexRoutes from './routes/index';
-import bloggersRoutes from './routes/bloggers';
+const indexRoutes = require('./routes/index');
+const bloggersRoutes = require('./routes/bloggers');
 
 
 // view engine setup
