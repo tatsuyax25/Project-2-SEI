@@ -3,7 +3,7 @@ var json = express.json;
 var urlencoded = express.urlencoded;
 // import cookieParser from 'cookie-parser';
 // session middleware
-import session from 'express-session';
+const session = require('express-session');
 import { initialize, session as _session } from 'passport';
 import methodOverride from 'method-override';
 
