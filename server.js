@@ -1,6 +1,6 @@
-var express = require('express');
-var json = express.json;
-var urlencoded = express.urlencoded;
+const express = require('express');
+const json = express.json;
+const urlencoded = express.urlencoded;
 // import cookieParser from 'cookie-parser';
 // session middleware
 const session = require('express-session');
