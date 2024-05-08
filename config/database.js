@@ -1,4 +1,4 @@
-import { connect, connection } from 'mongoose';
+const { connect, connection } = require('mongoose');
 
 // replace your database connection string here
 connect(process.env.DATABASE_URL,{
