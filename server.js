@@ -15,7 +15,7 @@ require('dotenv').config();
 const app = express();
 
 // connect to the MongoDB with mongoose
-import './config/database';
+require('./config/database');
 // configure Passport
 import './config/passport';
 
