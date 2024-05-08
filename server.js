@@ -17,7 +17,7 @@ const app = express();
 // connect to the MongoDB with mongoose
 require('./config/database');
 // configure Passport
-import './config/passport';
+require('./config/passport');
 
 // require our routes
 import indexRoutes from './routes/index';
