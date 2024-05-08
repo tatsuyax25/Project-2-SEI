@@ -1,13 +1,13 @@
 // Import necessary Passport functions and modules
 const { use, serializeUser, deserializeUser } = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy; // Use passport-google-oauth20 for OAuth2.0
+const passport = require("passport");
+const { Strategy: GoogleStrategy } = require('passport-google-oauth20'); // Use passport-google-oauth20 for OAuth2.0
 const { findOne, findById } = require('../models/user');
-const passport = require('passport');
 const Blogger = require('../models/user').default;
 //Require your User Model here!
 
 // Configure Passport to use the Google OAuth2 strategy
-use(
+passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID, // Your Google client ID obtained from the Google Developer Console
