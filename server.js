@@ -62,4 +62,4 @@ app.use(function(req, res) {
   res.status(404).send('Cant find that!');
 });
 
-export default app;
+module.exports = app;
