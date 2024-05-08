@@ -4,7 +4,8 @@ var urlencoded = express.urlencoded;
 // import cookieParser from 'cookie-parser';
 // session middleware
 const session = require('express-session');
-import { initialize, session as _session } from 'passport';
+const passport = require('passport');
+const { initialize, session: _session } = require('passport');
 import methodOverride from 'method-override';
 
 // load the env vars
