@@ -1,63 +1,69 @@
 const express = require('express');
-const json = express.json;
-const urlencoded = express.urlencoded;
-// import cookieParser from 'cookie-parser';
-// session middleware
-const session = require('express-session');
-const passport = require('passport');
-const { initialize, session: _session } = require('passport');
-const methodOverride = require('method-override');
+const { json, urlencoded } = require('express');
+const cookieParser = require('cookie-parser'); // Import cookieParser for parsing cookies
+const session = require('express-session'); // Import express-session for managing sessions
+const passport = require('passport'); // Import Passport for authentication
+const { initialize, session: _session } = require('passport'); // Import initialize and session middleware from Passport
+const methodOverride = require('method-override'); // Import methodOverride for HTTP method override
 
-// load the env vars
+// Load environment variables
 require('dotenv').config();
 
-// create the Express app
+// Create the Express app
 const app = express();
 
-// connect to the MongoDB with mongoose
+// Connect to MongoDB with mongoose
 require('./config/database');
-// configure Passport
+
+// Configure Passport
 require('./config/passport');
 
-// require our routes
+// Require routes
 const indexRoutes = require('./routes/index');
 const bloggersRoutes = require('./routes/bloggers');
 
 
-// view engine setup
-app.set('views', join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// View engine setup
+app.set('views', join(__dirname, 'views')); // Set the views directory
+app.set('view engine', 'ejs'); // Set EJS as the view engine
 
-app.use(methodOverride('_method'));
-app.use(express.static(join(__dirname, 'public')));
-app.use(logger('dev'));
-app.use(json());
-app.use(urlencoded({ extended: true }));
-app.use(cookieParser());
+// Middleware setup
+app.use(methodOverride('_method')); // Use methodOverride middleware
+app.use(express.static(join(__dirname, 'public'))); // Serve static files from the 'public' directory
+app.use(logger('dev')); // Use logger middleware for logging requests
+app.use(json()); // Parse JSON bodies
+app.use(urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(cookieParser());// Parse cookies
+
 // mount the session middleware
-app.use(session({
-  secret: 'SEI Rocks!',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "SEI Rocks!", // Secret key for session
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
-app.use(initialize());
-app.use(_session());
+// Use Passport in your server setup or routes
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(initialize()); // Initialize Passport
+app.use(_session()); // Use Passport session middleware
 
 
-// Add this middleware BELOW passport middleware
+// Middleware to make user data available in views
 app.use(function (req, res, next) {
-  res.locals.user = req.user; // assinging a property to res.locals, makes that said property (user) availiable in every
-  // single ejs view
+  res.locals.user = req.user; // Assign the authenticated user to res.locals.user
   next();
 });
 
-// mount all routes with appropriate base paths
-app.use('/', indexRoutes);
-app.use('/', bloggersRoutes);
+// Mount routes
+app.use('/', indexRoutes); // Mount indexRoutes with base path '/'
+app.use('/', bloggersRoutes); // Mount bloggersRoutes with base path '/'
 
 
-// invalid request, send 404 page
+// Handle invalid requests
 app.use(function(req, res) {
   res.status(404).send('Cant find that!');
 });

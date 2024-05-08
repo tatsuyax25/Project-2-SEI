@@ -1,59 +1,62 @@
+// Import necessary Passport functions and modules
 const { use, serializeUser, deserializeUser } = require('passport');
-const { OAuth2Strategy: GoogleStrategy } = require('passport-google-oauth');
+const GoogleStrategy = require('passport-google-oauth20').Strategy; // Use passport-google-oauth20 for OAuth2.0
 const { findOne, findById } = require('../models/user');
+const passport = require('passport');
 const Blogger = require('../models/user').default;
 //Require your User Model here!
 
-// configuring Passport!
-use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    // a user has logged in via OAuth!
-    // refer to the lesson plan from earlier today in order to set this up
-    console.log(profile, "<----Profile")
+// Configure Passport to use the Google OAuth2 strategy
+use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID, // Your Google client ID obtained from the Google Developer Console
+      clientSecret: process.env.GOOGLE_SECRET, // Your Google client secret obtained from the Google Developer Console
+      callbackURL: process.env.GOOGLE_CALLBACK, // The callback URL registered with Google Developer Console
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      // This function is called when a user has successfully authenticated via Google OAuth
+      console.log(profile, "<----Profile");
 
-    findOne({'googleId': profile.id}, function(err, bloggerDoc){
+      // Find if the user exists in your database based on the Google ID
+      findOne({ googleId: profile.id }, function(err, bloggerDoc) {
 
-      if(err) return cb(err);
+        if (err) return cb(err);
 
-      if(bloggerDoc){
+        if (bloggerDoc) {
+          // If the user already exists, return the user document
+          return cb(null, bloggerDoc);
+        } else {
+          // If the user does not exist, create a new user using the profile information
+          const newBlogger = new Blogger({
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            googleId: profile.id,
+          });
 
-        return cb(null, bloggerDoc)
+          // Save the new user to the database
+          newBlogger.save(function(err) {
+            if(err) return cb(err);
+            return cb(null, newBlogger);
+          });
+        }
+      });
+    }
+  )
+);
 
-      } else {
-
-        const newBlogger = new Blogger({
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          googleId: profile.id
-        })
-
-        newBlogger.save(function(err){
-          if(err) return cb(err);
-          return cb(null, newBlogger)
-        });
-      }
-    });
-
-  }
-));
-
+// Serialize the user to store in the session
 serializeUser(function(blogger, done) {
   done(null, blogger.id);
 });
 
+// Deserialize the user from the session
 deserializeUser(function(id, done) {
-
-  // Find your User, using your model, and then call done(err, whateverYourUserIsCalled)
-  // When you call this done function passport assigns the user document to req.user, which will 
-  // be availible in every Single controller function, so you always know the logged in user
-  findById(id, function(err, bloggerDoc){
+  // Find the user by ID in the database
+  findById(id, function (err, bloggerDoc) {
+    // Pass the user document to done callback
     done(err, bloggerDoc);
-  })
+  });
 });
 
-
-
+module.exports = passport;
