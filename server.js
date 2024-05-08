@@ -11,7 +11,7 @@ import methodOverride from 'method-override';
 require('dotenv').config();
 
 // create the Express app
-var app = express();
+const app = express();
 
 // connect to the MongoDB with mongoose
 import './config/database';
