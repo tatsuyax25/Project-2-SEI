@@ -6,7 +6,7 @@ var urlencoded = express.urlencoded;
 const session = require('express-session');
 const passport = require('passport');
 const { initialize, session: _session } = require('passport');
-import methodOverride from 'method-override';
+const methodOverride = require('method-override');
 
 // load the env vars
 require('dotenv').config();
