@@ -1,6 +1,7 @@
 const { use, serializeUser, deserializeUser } = require('passport');
 const { OAuth2Strategy: GoogleStrategy } = require('passport-google-oauth');
-import Blogger, { findOne, findById } from '../models/user';
+const { findOne, findById } = require('../models/user');
+const Blogger = require('../models/user').default;
 //Require your User Model here!
 
 // configuring Passport!
