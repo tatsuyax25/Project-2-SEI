@@ -1,4 +1,4 @@
-// const express = require('express');
+const express = require('express');
 const { json, urlencoded } = require('express');
 const cookieParser = require('cookie-parser'); // Import cookieParser for parsing cookies
 const session = require('express-session'); // Import express-session for managing sessions
