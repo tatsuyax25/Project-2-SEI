@@ -1,12 +1,14 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+// Import mongoose and get Schema constructor
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const commentSchema = new _Schema({
-    text: String,
-    user: {type: Schema.Types.ObjectId, ref: "User"}
+// Define the schema for a comment
+const commentSchema = new Schema({
+    text: String, // The comment text
+    user: { type: Schema.Types.ObjectId, ref: "User" } // Reference to the user who made the comment
 }, {
-    timestamps: true
+    timestamps: true // Automatically add createdAt and updatedAt fields
 });
 
-
-export default model('Comment', commentSchema);
+// Export the comment schema for embedding in other models (like Journal)
+module.exports = commentSchema;

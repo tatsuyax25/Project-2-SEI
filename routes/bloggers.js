@@ -1,5 +1,6 @@
 let router = require('express').Router();
-let bloggersCtrl = require('../controllers/bloggers').default;
+// Import the bloggers controller (CommonJS style)
+let bloggersCtrl = require('../controllers/bloggers');
 
 // GET /students
 router.get('/bloggers', bloggersCtrl.index);
