@@ -3,8 +3,9 @@ const { json, urlencoded } = require('express');
 const cookieParser = require('cookie-parser'); // Import cookieParser for parsing cookies
 const session = require('express-session'); // Import express-session for managing sessions
 const passport = require('passport'); // Import Passport for authentication
-const { initialize, session: _session } = require('passport'); // Import initialize and session middleware from Passport
 const methodOverride = require('method-override'); // Import methodOverride for HTTP method override
+const { join } = require('path'); // Import join from path
+const logger = require('morgan'); // Import logger middleware
 
 // Load environment variables
 require('dotenv').config();
@@ -38,7 +39,7 @@ app.use(cookieParser());// Parse cookies
 // mount the session middleware
 app.use(
   session({
-    secret: "SEI Rocks!", // Secret key for session
+    secret: process.env.SESSION_SECRET || "SEI Rocks!", // Use env var for session secret
     resave: false,
     saveUninitialized: true,
   })
@@ -47,9 +48,6 @@ app.use(
 // Use Passport in your server setup or routes
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(initialize()); // Initialize Passport
-app.use(_session()); // Use Passport session middleware
 
 
 // Middleware to make user data available in views
@@ -69,3 +67,11 @@ app.use(function(req, res) {
 });
 
 module.exports = app;
+
+// If running directly, start the server (for local dev or platforms like Vercel)
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}

@@ -1,43 +1,41 @@
-// Import necessary Passport functions and modules
-const { use, serializeUser, deserializeUser } = require('passport');
-const passport = require("passport");
-const { Strategy: GoogleStrategy } = require('passport-google-oauth20'); // Use passport-google-oauth20 for OAuth2.0
-const { findOne, findById } = require('../models/user');
-const Blogger = require('../models/user').default;
-//Require your User Model here!
+// Import the main Passport instance
+const passport = require('passport');
+// Import the Google OAuth 2.0 strategy
+const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
+// Import the User model (adjust as needed for your project)
+const User = require('../models/user');
 
 // Configure Passport to use the Google OAuth2 strategy
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID, // Your Google client ID obtained from the Google Developer Console
-      clientSecret: process.env.GOOGLE_SECRET, // Your Google client secret obtained from the Google Developer Console
-      callbackURL: process.env.GOOGLE_CALLBACK, // The callback URL registered with Google Developer Console
+      clientID: process.env.GOOGLE_CLIENT_ID, // Google client ID from environment variables
+      clientSecret: process.env.GOOGLE_SECRET, // Google client secret from environment variables
+      callbackURL: process.env.GOOGLE_CALLBACK, // Callback URL registered with Google
     },
+    // This function runs after Google authenticates the user
     function (accessToken, refreshToken, profile, cb) {
-      // This function is called when a user has successfully authenticated via Google OAuth
-      console.log(profile, "<----Profile");
+      // Log the Google profile for debugging
+      console.log(profile, '<----Profile');
 
-      // Find if the user exists in your database based on the Google ID
-      findOne({ googleId: profile.id }, function(err, bloggerDoc) {
-
+      // Try to find an existing user with the Google ID
+      User.findOne({ googleId: profile.id }, function (err, userDoc) {
         if (err) return cb(err);
-
-        if (bloggerDoc) {
-          // If the user already exists, return the user document
-          return cb(null, bloggerDoc);
+        if (userDoc) {
+          // User exists, return the user
+          return cb(null, userDoc);
         } else {
-          // If the user does not exist, create a new user using the profile information
-          const newBlogger = new Blogger({
+          // User does not exist, create a new user
+          const newUser = new User({
             name: profile.displayName,
-            email: profile.emails[0].value,
+            // Use optional chaining to safely access the user's email from the Google profile
+            email: profile.emails?.[0]?.value || '',
             googleId: profile.id,
           });
-
           // Save the new user to the database
-          newBlogger.save(function(err) {
-            if(err) return cb(err);
-            return cb(null, newBlogger);
+          newUser.save(function (err) {
+            if (err) return cb(err);
+            return cb(null, newUser);
           });
         }
       });
@@ -45,18 +43,17 @@ passport.use(
   )
 );
 
-// Serialize the user to store in the session
-serializeUser(function(blogger, done) {
-  done(null, blogger.id);
+// Serialize the user to store in the session (user.id is saved in the session cookie)
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 });
 
-// Deserialize the user from the session
-deserializeUser(function(id, done) {
-  // Find the user by ID in the database
-  findById(id, function (err, bloggerDoc) {
-    // Pass the user document to done callback
-    done(err, bloggerDoc);
+// Deserialize the user from the session (fetch user from DB by ID)
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, userDoc) {
+    done(err, userDoc);
   });
 });
 
+// Export the configured passport instance
 module.exports = passport;
