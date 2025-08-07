@@ -41,7 +41,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET || "SEI Rocks!", // Use env var for session secret
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 

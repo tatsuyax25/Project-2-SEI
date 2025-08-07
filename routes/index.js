@@ -26,10 +26,23 @@ router.get('/oauth2callback', passport.authenticate(
 
 // OAuth logout route
 // Logs the user out and redirects to bloggers
-router.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/bloggers');
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/bloggers");
+  });
 });
+
+router.get("/me", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).json({ message: "Not logged in" });
+  }
+});
+
 
 // Export the router for use in the main app
 module.exports = router;
