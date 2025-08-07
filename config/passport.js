@@ -5,6 +5,11 @@ const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 // Import the User model (adjust as needed for your project)
 const User = require('../models/user');
 
+// ✅ Early environment check
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_SECRET || !process.env.GOOGLE_CALLBACK) {
+  throw new Error('Missing one or more Google OAuth environment variables');
+}
+
 // Configure Passport to use the Google OAuth2 strategy
 passport.use(
   new GoogleStrategy(
