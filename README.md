@@ -57,4 +57,4 @@
 
 4. Add a comment box to add comments on a journal.
 
-https://project-2-sei.herokuapp.com/ 
+https://the-great-journal.onrender.com
