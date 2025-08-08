@@ -71,8 +71,6 @@ app.use(function(req, res) {
   res.status(404).send('Cant find that!');
 });
 
-module.exports = app;
-
 // If running directly, start the server (for local dev or platforms like Vercel)
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
@@ -80,3 +78,5 @@ if (require.main === module) {
     console.log(`Server running on port ${PORT}`);
   });
 }
+
+module.exports = app;

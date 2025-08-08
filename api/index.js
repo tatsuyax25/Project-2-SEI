@@ -1,2 +1,5 @@
-import server from '../server';
-export default server;
+import server from "../server.js";
+
+export default function handler(req, res) {
+  return server(req, res);
+}
