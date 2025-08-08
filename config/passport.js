@@ -11,10 +11,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_SECRET) {
 }
 
 // ✅ Determine environment and set callback URL accordingly
-const isProd = process.env.NODE_ENV === 'production';
-const callbackURL = isProd
-  ? "https://the-great-journal.onrender.com/oauth2callback" // e.g., https://your-app.onrender.com/oauth2callback
-  : "http://localhost:3000/oauth2callback"; // e.g., http://localhost:3000/oauth2callback
+const callbackURL = process.env.GOOGLE_CALLBACK;
+console.log(`🔁 Using callback URL: ${callbackURL}`);
+
 
 // ✅ Configure Passport to use the Google OAuth2 strategy
 passport.use(

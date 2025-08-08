@@ -10,6 +10,11 @@ const logger = require('morgan'); // Import logger middleware
 // Load environment variables
 require('dotenv').config();
 
+// If using a local .env file, uncomment the line below
+//  and ensure you have the .env.local file set up correctly
+require("dotenv").config({ path: ".env.local" });
+
+
 // Create the Express app
 const app = express();
 
