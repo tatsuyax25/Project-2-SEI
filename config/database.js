@@ -3,8 +3,14 @@ const { connect, connection } = require('mongoose');
 // Load environment variables
 require('dotenv').config();
 
-// replace your database connection string here
-connect(process.env.DATABASE_URL,{
+// Validate DATABASE_URL exists
+if (!process.env.DATABASE_URL) {
+  console.error('❌ DATABASE_URL environment variable is not set');
+  process.exit(1);
+}
+
+// Connect to MongoDB
+connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
