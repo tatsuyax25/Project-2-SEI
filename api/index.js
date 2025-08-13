@@ -1,5 +1,3 @@
-import server from "../server.js";
+const app = require('../server.js');
 
-export default function handler(req, res) {
-  return server(req, res);
-}
+module.exports = app;
