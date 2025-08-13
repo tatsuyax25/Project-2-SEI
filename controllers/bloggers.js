@@ -25,11 +25,7 @@ async function show(req, res) {
     const journal = await Journal.findById(req.params.id);
     const thisIsWhatWeAreSendingToTheView = { journal, username };
     console.log(username, journal.user, username === journal.user);
-    if (username?.toString() === journal.user.toString()) {
-        res.render("bloggers/edit", thisIsWhatWeAreSendingToTheView);
-    } else {
-        res.render("bloggers/show", thisIsWhatWeAreSendingToTheView);
-    }
+    res.render("bloggers/show", thisIsWhatWeAreSendingToTheView);
     console.log(journal);
 }
 
