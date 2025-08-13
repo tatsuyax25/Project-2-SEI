@@ -10,20 +10,29 @@
 
 <img width="662" alt="Screen Shot 2021-10-08 at 9 19 11 AM" src="https://user-images.githubusercontent.com/44272798/136590467-ba1b7a02-3d1e-48a1-a4f8-01e3164eb869.png">
 
-## Before Log In
-<img width="1386" alt="Screen Shot 2021-10-08 at 9 28 00 AM" src="https://user-images.githubusercontent.com/44272798/136592339-7012e454-7ef0-473a-92b6-9949fee15004.png">
+## User Log in (Before)
+<img width="1389" alt="Screen Shot 2021-10-08 at 9 28 52 AM" src="https://imgur.com/3KCMeGx.png">
 
-## User Login
-<img width="1389" alt="Screen Shot 2021-10-08 at 9 28 52 AM" src="https://user-images.githubusercontent.com/44272798/136592352-c67ed90c-4afc-4f37-b792-52b48fda04c9.png">
+## User Log in (After)
+<img width="1389" alt="Screen Shot 2021-10-08 at 9 28 52 AM" src="https://i.imgur.com/LZCKbVr.png">
 
-## User Edit
-<img width="1390" alt="Screen Shot 2021-10-08 at 9 29 27 AM" src="https://user-images.githubusercontent.com/44272798/136592366-b042bbfd-caaf-4f2a-ab18-7ddcfaa4adec.png">
+## User Create New Post (Before)
+<img width="1395" alt="Screen Shot 2021-10-08 at 9 33 40 AM" src="https://imgur.com/gJjcuTC.png">
 
-## User Create
-<img width="1395" alt="Screen Shot 2021-10-08 at 9 33 40 AM" src="https://user-images.githubusercontent.com/44272798/136592387-37faa06f-307d-415e-be5b-92a7429c6e73.png">
+## User Create New Post (After)
+<img width="1395" alt="Screen Shot 2021-10-08 at 4 03 40 PM" src="https://imgur.com/7jn1Wkh.png">
 
-## User Delete
-<img width="1385" alt="Screen Shot 2021-10-08 at 9 34 22 AM" src="https://user-images.githubusercontent.com/44272798/136592404-73e96504-a21c-4457-9837-4f03d39f9a4b.png">
+## User Edit Post (Before)
+<img width="1390" alt="Screen Shot 2021-10-08 at 9 29 27 AM" src="https://imgur.com/RvQDTLB.png">
+
+## User Edit Post (During)
+<img width="1390" alt="Screen Shot 2021-10-08 at 9 29 27 AM" src="https://imgur.com/azssXrY.png">
+
+## User Delete Post (Before)
+<img width="1385" alt="Screen Shot 2021-10-08 at 9 34 22 AM" src="https://imgur.com/7jn1Wkh.png">
+
+## User Delete Post (After)
+<img width="1385" alt="Screen Shot 2021-10-08 at 9 34 22 AM" src="https://imgur.com/i2mxKvD.png">
 
 ## Technology
 
@@ -43,7 +52,7 @@
 
 8. Google Dev Console
 
-9. Heroku
+9. Render
 
 10. Node.js
 
