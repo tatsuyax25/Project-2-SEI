@@ -11,12 +11,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_SECRET) {
 }
 
 // ✅ Determine environment and set callback URL accordingly
-const isVercel = process.env.VERCEL || process.env.VERCEL_ENV;
-const callbackURL = isVercel 
-  ? process.env.GOOGLE_CALLBACK_VERCEL 
-  : process.env.GOOGLE_CALLBACK_RENDER;
-
+const callbackURL = process.env.GOOGLE_CALLBACK;
 console.log(`🔁 Using callback URL: ${callbackURL}`);
+
 
 // ✅ Configure Passport to use the Google OAuth2 strategy
 passport.use(
@@ -24,7 +21,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: callbackURL,
+      callbackURL: process.env.GOOGLE_CALLBACK,
     },
     async function (accessToken, refreshToken, profile, cb) {
       try {

@@ -2,12 +2,8 @@
   "name": "project-2-sei",
   "version": "0.0.0",
   "private": true,
-  "engines": {
-    "node": ">=18.x"
-  },
   "scripts": {
-    "start": "node server.js",
-    "dev": "node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
