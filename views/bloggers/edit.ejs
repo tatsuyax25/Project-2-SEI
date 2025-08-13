@@ -2,18 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Adventure - The Great Outdoor Journal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Icon Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-    <h1>Edit Journal</h1>
-    <form action="/bloggers/<%= journal._id %>?_method=PUT" method="POST">
-        <input type="text" name="name" value="<%= journal.name %>" >
-        <input type="text" name="text" value="<%= journal.text %>">
-        <input type="submit">
-    </form>
-   
-
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/bloggers" class="brand-logo left">
+                    <i class="material-icons left">nature</i>The Great Outdoor Journal
+                </a>
+                <ul class="right">
+                    <li><a href="/bloggers/<%= journal._id %>"><i class="material-icons left">arrow_back</i>Back to Adventure</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="container" style="margin-top: 2rem;">
+        <div class="welcome-section">
+            <h2>
+                <i class="material-icons medium" style="vertical-align: middle; margin-right: 10px;">edit</i>
+                Edit Your Adventure
+            </h2>
+            <p>Update the details of your outdoor experience</p>
+        </div>
+        
+        <div class="card journal-card">
+            <div class="card-content">
+                <form action="/bloggers/<%= journal._id %>?_method=PUT" method="POST">
+                    <div class="input-field">
+                        <i class="material-icons prefix">title</i>
+                        <input type="text" name="name" value="<%= journal.name %>" id="adventure-title" required>
+                        <label for="adventure-title" class="active">Adventure Title</label>
+                    </div>
+                    
+                    <div class="input-field">
+                        <i class="material-icons prefix">description</i>
+                        <textarea name="text" id="adventure-text" class="materialize-textarea" required><%= journal.text %></textarea>
+                        <label for="adventure-text" class="active">Adventure Description</label>
+                    </div>
+                    
+                    <div class="card-action" style="text-align: center; padding-top: 2rem;">
+                        <button type="submit" class="btn btn-custom waves-effect waves-light">
+                            <i class="material-icons left">save</i>Update Adventure
+                        </button>
+                        <a href="/bloggers/<%= journal._id %>" class="btn-flat" style="margin-left: 1rem;">
+                            <i class="material-icons left">cancel</i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Initialize Materialize components
+        document.addEventListener('DOMContentLoaded', function() {
+            M.textareaAutoResize(document.getElementById('adventure-text'));
+        });
+    </script>
 </body>
 </html>
