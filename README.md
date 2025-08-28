@@ -107,15 +107,7 @@ The Great Outdoor Journal is a CRUD (Create, Read, Update, Delete) web applicati
    ```
 
 3. **Set up environment variables**
-   Create a `.env` file in the root directory:
-   ```env
-   NODE_ENV=development
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_SECRET=your_google_client_secret
-   GOOGLE_CALLBACK=http://localhost:3000/oauth2callback
-   DATABASE_URL=your_mongodb_connection_string
-   SESSION_SECRET=your_session_secret
-   ```
+   Create a `.env` file in the root directory with your Google OAuth credentials, MongoDB connection string, and session secret.
 
 4. **Start the application**
    ```bash
