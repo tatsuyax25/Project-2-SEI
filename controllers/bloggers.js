@@ -57,66 +57,20 @@ function newBlogger(req, res) {
 async function update(req, res) {
     console.log("update function called");
     console.log(req.body, "<-- form being updated");
-    
-    try {
-        // Input validation and sanitization
-        const name = req.body.name ? req.body.name.trim().substring(0, 100) : '';
-        const text = req.body.text ? req.body.text.trim().substring(0, 1000) : '';
-        
-        if (!name || !text) {
-            return res.status(400).send('Name and text are required');
-        }
-        
-        // Basic HTML sanitization
-        const sanitizedName = name.replace(/<script[^>]*>.*?<\/script>/gi, '');
-        const sanitizedText = text.replace(/<script[^>]*>.*?<\/script>/gi, '');
-        
-        const updateData = {
-            name: sanitizedName,
-            text: sanitizedText
-        };
-        
-        const updatedJournal = await Journal.findByIdAndUpdate(
-            req.params.id,
-            updateData,
-            { new: true }
-        );
-        
-        console.log(updatedJournal);
-        res.redirect("/bloggers");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error updating journal');
-    }
+    const updatedJournal = await Journal.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+    );
+    console.log(updatedJournal);
+    res.redirect("/bloggers");
 }
 
 function create(req, res) {
     console.log(req.user, "This is my user!");
-    
-    // Input validation and sanitization
-    const name = req.body.name ? req.body.name.trim().substring(0, 100) : '';
-    const text = req.body.text ? req.body.text.trim().substring(0, 1000) : '';
-    
-    if (!name || !text) {
-        return res.status(400).send('Name and text are required');
-    }
-    
-    // Basic HTML sanitization (remove script tags)
-    const sanitizedName = name.replace(/<script[^>]*>.*?<\/script>/gi, '');
-    const sanitizedText = text.replace(/<script[^>]*>.*?<\/script>/gi, '');
-    
-    const journalData = {
-        name: sanitizedName,
-        text: sanitizedText,
-        user: req.user._id
-    };
-    
-    let newJournal = new Journal(journalData);
+    req.body.user = req.user._id;
+    let newJournal = new Journal(req.body);
     newJournal.save(function (err) {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Error creating journal');
-        }
         res.redirect("/bloggers");
     });
 }

@@ -33,15 +33,6 @@ const bloggersRoutes = require('./routes/bloggers');
 app.set('views', join(__dirname, 'views')); // Set the views directory
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 
-// Security headers
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  next();
-});
-
 // Middleware setup
 app.use(methodOverride('_method')); // Use methodOverride middleware
 app.use(express.static(join(__dirname, 'public'))); // Serve static files from the 'public' directory
@@ -53,14 +44,9 @@ app.use(cookieParser());// Parse cookies
 // mount the session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "SEI Rocks!",
+    secret: process.env.SESSION_SECRET || "SEI Rocks!", // Use env var for session secret
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-      httpOnly: true, // Prevent XSS attacks
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
-    }
   })
 );
 
