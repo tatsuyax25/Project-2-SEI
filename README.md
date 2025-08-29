@@ -123,11 +123,12 @@ The Great Outdoor Journal is a CRUD (Create, Read, Update, Delete) web applicati
 
 - [ ] **Alternative Authentication** - Add email/password signup for users without Google accounts
 - [ ] **Image Upload** - Allow users to attach photos to their adventure journals
-- [ ] **Enhanced Styling** - Additional UI/UX improvements and animations
 - [ ] **Comment System** - Enable users to comment on each other's adventures
 - [ ] **Search & Filter** - Add search functionality and filtering options
 - [ ] **Adventure Categories** - Organize adventures by activity type (hiking, camping, etc.)
 - [ ] **User Profiles** - Dedicated user profile pages with adventure statistics
+- [ ] **Adventure Map** - Interactive map showing adventure locations
+- [ ] **Social Features** - Follow other adventurers and see their latest posts
 
 ---
 
@@ -135,7 +136,7 @@ The Great Outdoor Journal is a CRUD (Create, Read, Update, Delete) web applicati
 
 **Miguel Urena**
 - GitHub: [@tatsuyax25](https://github.com/tatsuyax25)
-- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/urena-miguel82/)
+- LinkedIn: [Miguel Urena](https://www.linkedin.com/in/urena-miguel82/)
 
 ---
 
